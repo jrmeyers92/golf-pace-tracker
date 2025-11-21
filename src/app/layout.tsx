@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
@@ -90,8 +91,7 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#16a34a" />
-        <link rel="canonical" href="https://golfpacetracker.com" />{" "}
-        {/* Update with your actual domain */}
+        <link rel="canonical" href="https://golfpacetracker.com" />
       </head>
       <ClerkProvider>
         <body
@@ -99,6 +99,7 @@ export default function RootLayout({
         >
           <Nav />
           {children}
+          <Footer />
         </body>
       </ClerkProvider>
     </html>

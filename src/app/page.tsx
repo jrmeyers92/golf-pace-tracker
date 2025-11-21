@@ -1,5 +1,5 @@
+import CourseSearchHero from "@/components/CourseSearchHero";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Clock, MapPin, Search, Timer, TrendingUp, Users } from "lucide-react";
 import Link from "next/link";
 
@@ -15,33 +15,12 @@ export default function Home() {
               <span className="text-primary">Before You Go</span>
             </h1>
             <p className="mt-6 text-lg text-muted-foreground md:text-xl">
-              Real pace of play data from golfers like you. Find out how long
-              rounds actually take at your course based on time of day, day of
-              week, and group size.
+              Real pace of play data from golfers like you. Search by course
+              name or location to find out how long rounds actually take.
             </p>
 
-            {/* Search Bar */}
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:gap-2">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  type="text"
-                  placeholder="Search for a golf course..."
-                  className="h-12 bg-card pl-10 pr-4 shadow-md"
-                />
-              </div>
-              <Button size="lg" className="h-12 px-8 shadow-md">
-                Search Courses
-              </Button>
-            </div>
-
-            <p className="mt-4 text-sm text-muted-foreground">
-              Or{" "}
-              <Link href="/submit" className="text-primary hover:underline">
-                submit your round time
-              </Link>{" "}
-              to help the community
-            </p>
+            {/* Client Component for Search */}
+            <CourseSearchHero />
           </div>
         </div>
       </section>
@@ -180,7 +159,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-semibold">Search for a Course</h3>
               <p className="mt-2 text-muted-foreground">
-                Find the golf course you're planning to play or have just
+                Find the golf course you&apos;re planning to play or have just
                 played.
               </p>
             </div>

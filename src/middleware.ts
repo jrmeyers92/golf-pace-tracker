@@ -8,7 +8,7 @@ const isPublicRoute = createRouteMatcher([
   "/sign-in(.*)",
   "/sign-up(.*)",
   "/courses(.*)",
-  "/course/(.*)", // If you have individual course pages
+  "/course/(.*)",
 ]);
 
 // Define protected API routes
