@@ -8,7 +8,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { SignedIn, SignedOut, SignOutButton, UserButton } from "@clerk/nextjs";
-import { Gem, Heart, Home, Menu, Search } from "lucide-react";
+import { Heart, Home, LandPlot, Menu, Search } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 import { buttonVariants } from "./ui/button";
@@ -22,12 +22,15 @@ const Nav = () => {
           href="/"
           className="flex gap-2 items-center text-xl font-bold justify-center"
         >
-          <Gem className="text-primary" size={28} />
-          <span>APP NAME</span>
+          <LandPlot className="text-primary" size={28} />
+          <span>Pace Of Play Tracker</span>
         </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
+          <div className="">
+            <Link href="/courses">Courses</Link>
+          </div>
           {/* Auth Buttons */}
           <SignedIn>
             <div className="flex items-center gap-4">

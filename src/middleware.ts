@@ -7,51 +7,53 @@ const isPublicRoute = createRouteMatcher([
   "/",
   "/sign-in(.*)",
   "/sign-up(.*)",
-  "/api/webhooks(.*)",
+  "/courses(.*)",
+  "/course/(.*)", // If you have individual course pages
 ]);
 
-// Define API routes that need protection
+// Define protected API routes
 const isProtectedApiRoute = createRouteMatcher([
   "/api/protected(.*)",
+  "/api/submit(.*)", // Add your submit round endpoint
   // Add other protected API routes
+]);
+
+// Public API routes (no auth needed)
+const isPublicApiRoute = createRouteMatcher([
+  "/api/webhooks(.*)",
+  "/api/courses(.*)", // If you want public course data access
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
   const path = req.nextUrl.pathname;
 
-  // Handle API routes first
+  // Allow public API routes without auth check
+  if (isPublicApiRoute(req)) {
+    return NextResponse.next();
+  }
+
+  // Protect specific API routes
+  if (isProtectedApiRoute(req)) {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    return NextResponse.next();
+  }
+
+  // Allow all other API routes (adjust based on your needs)
   if (path.startsWith("/api")) {
-    // Allow public API routes
-    if (path.startsWith("/api/webhooks")) {
-      return NextResponse.next();
-    }
-
-    // Protect specific API routes if needed
-    if (isProtectedApiRoute(req)) {
-      const { userId } = await auth();
-      if (!userId) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-      }
-    }
-
     return NextResponse.next();
   }
 
-  // Skip middleware for Next.js internals and static files
-  if (path.startsWith("/_next")) {
-    return NextResponse.next();
-  }
-
-  // For public routes, don't require authentication
+  // Allow public routes
   if (isPublicRoute(req)) {
     return NextResponse.next();
   }
 
-  // Get auth info for protected routes
-  const { userId, sessionClaims } = await auth();
-
-  // If not authenticated and trying to access protected route
-  if (!userId && !isPublicRoute(req)) {
+  // For protected routes, require authentication
+  const { userId } = await auth();
+  if (!userId) {
     return NextResponse.redirect(new URL("/sign-in", req.url));
   }
 
@@ -60,9 +62,7 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
     "/(api|trpc)(.*)",
   ],
 };
