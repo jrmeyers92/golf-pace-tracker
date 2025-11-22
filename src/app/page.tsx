@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-primary/10 via-background to-background py-20 md:py-32">
+      <section className="relative bg-linear-to-b from-primary/10 via-background to-background py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
@@ -190,7 +190,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="mx-auto max-w-3xl rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 p-8 text-center md:p-12">
+          <div className="mx-auto max-w-3xl rounded-2xl bg-linear-to-br from-primary/20 to-primary/5 p-8 text-center md:p-12">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
               Ready to Track Your Pace?
             </h2>

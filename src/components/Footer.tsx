@@ -63,7 +63,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/submit"
+                  href="/submit-round"
                   className="text-sm text-muted-foreground transition-colors hover:text-primary"
                 >
                   Submit Round Time

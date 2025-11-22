@@ -5,7 +5,7 @@ export default function SubmitCoursePage() {
   return (
     <main className="min-h-screen">
       {/* Hero Header */}
-      <section className="border-b bg-gradient-to-b from-primary/5 to-background py-12 md:py-16">
+      <section className="border-b bg-linear-to-brfrom-primary/5 to-background py-12 md:py-16">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">

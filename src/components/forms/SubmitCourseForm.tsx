@@ -95,7 +95,7 @@ export default function SubmitCourseForm() {
       name: "",
       address: "",
       city: "",
-      state: "",
+      state: undefined,
       zip_code: "",
       country: "US",
       number_of_holes: 18,

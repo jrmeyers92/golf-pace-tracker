@@ -28,8 +28,9 @@ const Nav = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
-          <div className="">
+          <div className="flex items-center gap-4">
             <Link href="/courses">Courses</Link>
+            <Link href="/submit-round">Submit Round</Link>
           </div>
           {/* Auth Buttons */}
           <SignedIn>
