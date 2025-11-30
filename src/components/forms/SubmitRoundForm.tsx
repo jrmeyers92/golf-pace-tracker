@@ -136,7 +136,7 @@ export default function SubmitRoundForm({ courses }: SubmitRoundFormProps) {
                   </SelectContent>
                 </Select>
                 <FormDescription>
-                  Can't find your course?{" "}
+                  Can&apos;t find your course?{" "}
                   <a
                     href="/submit-course"
                     className="text-primary underline hover:no-underline"

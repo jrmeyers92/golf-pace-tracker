@@ -37,13 +37,34 @@ export async function searchCourses(
       count: "exact",
     });
 
+    // FILTER: Only verified courses
+    query = query.eq("verified", true);
+
     // 1. TEXT SEARCH - Uses the full-text search index
     if (filters.q) {
-      // Use full-text search for course names
-      query = query.textSearch("name", filters.q, {
-        type: "websearch",
-        config: "english",
-      });
+      const searchTerm = filters.q.trim();
+      const isZipCode = /^\d{5}(-\d{4})?$/.test(searchTerm);
+
+      if (isZipCode) {
+        // ZIP code search - match full ZIP or first 3 digits (broader area)
+        const fullZip = searchTerm.substring(0, 5);
+        const zipPrefix = searchTerm.substring(0, 3);
+
+        query = query.or(
+          `zip_code.eq.${fullZip},` + // Exact match
+            `zip_code.ilike.${zipPrefix}%` // Nearby ZIPs
+        );
+      } else {
+        // Text search across all relevant fields
+        const lowerTerm = searchTerm.toLowerCase();
+        query = query.or(
+          `name.ilike.%${lowerTerm}%,` +
+            `city.ilike.%${lowerTerm}%,` +
+            `state.ilike.%${lowerTerm}%,` +
+            `address.ilike.%${lowerTerm}%,` +
+            `zip_code.ilike.%${lowerTerm}%` // Partial ZIP match for text search
+        );
+      }
     }
 
     // 2. LOCATION FILTERS
